@@ -1,40 +1,48 @@
-This is a Kotlin Multiplatform project targeting Android, Desktop (JVM).
+# 칸반 보드 생성
+## 1단계 - 칸반 보드 생성(상품 목록)
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+## 요구 사항
+### 기능 요구 사항
+- [ ] 필수 입력 란과 선택 입력 란을 구분한다. 
+  - [ ] 필수 입력: 제목, 상태, 담당자 
+  - [ ] 선택 입력: 설명, 태그 
+- [ ] 상태와 담당자는 첫 번째 항목으로 기본 선택되어 있고, 한 항목만 선택 가능하다. 
+- [ ] 유효성 검사가 실패하면 생성 버튼을 누를 수 없다.
+- [x] 기존 코드를 마이그레이션한 뒤 하나의 커밋으로 합친다.
 
-### Build and Run Android Application
+### 프로그래밍 요구 사항
+- ViewModel, Hilt 등은 장바구니 미션에서 활용하지 않는다. 컴포즈 학습에 집중하자. 
+- 컴포저블 함수가 너무 많은 일을 하지 않도록 분리하기 위해 노력해 본다. 
+- 디자인 정합성을 맞추기 위한 너무 많은 노력을 기울이지 않아도 된다.
+  - 1px 단위에 연연하지 말고, 폰트와 색상도 중요하지 않다. 
+- 단위 테스트만으로도 충분한 로직과, UI 테스트가 필요한 영역을 구분한다. 
+  - 핵심 비즈니스 로직을 가지는 객체를 분리해 단위 테스트를 진행한다. 
+  - Compose UI Testing을 활용하여 기능 요구 사항을 테스트한다.
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+## 구현할 기능
+### UI
+- [ ] 제목 입력 필드 작성
+- [ ] 설명 입력 필드 작성
+- [ ] 태그 입력 필드 작성
+- [ ] 상태 선택 버튼 작성
+- [ ] 담당자 선택 버튼 작성
+- [ ] 생성, 취소, 닫기 버튼 작성
+- [ ] KanbanBoard 새 태스크 생성 버튼 작성
+- [ ] Card 입력 UI 내 비즈니즈 로직 분리
 
-### Build and Run Desktop (JVM) Application
+### Domain
+- [ ] 상태 로직 추가
+- [ ] 디자인 가이드에 따른 용어 변경
 
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
+## 테스트
+### Unit 테스트
+- [ ] 상태 관련 테스트 로직 추가
 
----
+### UI 테스트
+- [ ] 상태 버튼 클릭 시 선택 효과 표시 여부 확인
+- [ ] 담당자 버튼 클릭 시 선택 효과 표시 여부 확인
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 리팩토링
+### 1단계
+- 프로덕션
+- 테스트
