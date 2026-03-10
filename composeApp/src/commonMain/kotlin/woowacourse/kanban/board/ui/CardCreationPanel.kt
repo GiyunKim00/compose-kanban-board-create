@@ -18,11 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.domain.KanbanBoardCardData
+import woowacourse.kanban.board.domain.CardData
 
 @Composable
-fun InputWindow(
-    onAddItem: (KanbanBoardCardData) -> Unit,
+fun CardCreationPanel(
+    onAddItem: (CardData) -> Unit,
     onShowInputWindow: (Boolean) -> Unit,
 ) {
     var title by remember { mutableStateOf("LazyColumn 컴포넌트 구현") }
@@ -83,7 +83,7 @@ fun InputWindow(
             // 확인 버튼
             Button(
                 onClick = {
-                    onAddItem(KanbanBoardCardData.create(title, contents, tags, author))
+                    onAddItem(CardData.create(title, contents, tags, author))
                     onShowInputWindow(false)
                 },
                 modifier = Modifier.align(Alignment.End),
