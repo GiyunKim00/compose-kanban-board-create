@@ -89,6 +89,11 @@ fun CardCreationPanel(
                     selectedState = state,
                     onStateChange = { state = it },
                 )
+
+                CardCreationPanelManagerSection(
+                    selectedManager = manager,
+                    onManagerChange = { manager = it },
+                )
             }
         }
 
@@ -234,6 +239,77 @@ private fun StateButton(
             letterSpacing = (-0.3).sp,
             lineHeight = 24.sp,
         )
+    }
+}
+
+@Composable
+private fun CardCreationPanelManagerSection(
+    selectedManager: String,
+    onManagerChange: (String) -> Unit,
+) {
+    Column() {
+        TitleText("담당자 *")
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            ManagerButton(
+                text = "다이노",
+                isSelected = selectedManager == "다이노",
+                onClick = { onManagerChange("다이노") },
+                modifier = Modifier.width(200.dp).height(68.dp),
+            )
+            ManagerButton(
+                text = "페임스",
+                isSelected = selectedManager == "페임스",
+                onClick = { onManagerChange("페임스") },
+                modifier = Modifier.width(200.dp).height(68.dp),
+            )
+        }
+    }
+}
+
+@Composable
+private fun ManagerButton(
+    text: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val containerColor = if (isSelected) Color(0xFFE5E7EB) else Color.White
+    val contentColor = if (isSelected) Color(0xFF1447E6) else Color.Black
+    val borderColor = if (isSelected) Color(0xFF1447E6) else Color(0xFFE5E7EB)
+
+    OutlinedButton(
+        onClick = onClick,
+        shape = RoundedCornerShape(20),
+        border = BorderStroke(1.dp, borderColor),
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+        ),
+        modifier = modifier,
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = "매니저 아이콘",
+                modifier = Modifier.size(24.dp),
+                tint = Color(0xFF838383),
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = text,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                letterSpacing = (-0.15).sp,
+                lineHeight = 20.sp,
+            )
+        }
     }
 }
 
