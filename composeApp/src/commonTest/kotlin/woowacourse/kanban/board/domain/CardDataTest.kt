@@ -129,4 +129,31 @@ class CardDataTest {
 
         assertFalse(cardData.hasTag())
     }
+
+    @Test
+    fun `잘못된 태그 문자열이 주어질 시 false가 반환된다`() {
+        assertFalse(CardData.isValidTag(",..."))
+    }
+
+    @Test
+    fun `잘못된 태그 문자열이 주어질 시 에러메시지가 반환된다`() {
+        assertEquals("태그 형식이 올바르지 않습니다.", CardData.isValidTagInfo(",..."))
+        assertEquals("태그는 5자 이내로 5개까지만 등록할 수 있습니다.", CardData.isValidTagInfo("태그1,태그2,태그3,태그4,태그5,태그6"))
+    }
+
+    @Test
+    fun `쉼표를 기준으로 태그 문자열을 분리한다`() {
+        assertEquals(
+            listOf("태그1", "태그2", "태그3"),
+            CardData.parseTag("태그1,태그2,태그3"),
+        )
+    }
+
+    @Test
+    fun `태그 문자열의 앞뒤 공백을 제거한 후 쉼표를 기준으로 분리한다`() {
+        assertEquals(
+            listOf("태그1", "태그2"),
+            CardData.parseTag("태그1,태그2   "),
+        )
+    }
 }
