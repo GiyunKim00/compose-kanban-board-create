@@ -94,6 +94,17 @@ fun CardCreationPanel(
                     selectedManager = manager,
                     onManagerChange = { manager = it },
                 )
+
+                HorizontalDivider(modifier = Modifier.fillMaxWidth())
+
+                ActionButtonSection(
+                    onClick = {
+                        onShowCardCreationPanel(false)
+                    },
+                    onCreate = {
+                        onAddItem(CardData.create(taskTitle, contents, tags.split(","), manager))
+                    }
+                )
             }
         }
 
@@ -313,6 +324,67 @@ private fun ManagerButton(
     }
 }
 
+@Composable
+private fun ActionButtonSection(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {},
+    onCreate: () -> Unit = {},
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.End,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        ActionButton(
+            buttonText = "취소",
+            onClick = {
+                onClick()
+            },
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        ActionButton(
+            buttonText = "생성",
+            onClick = {
+                onClick()
+                onCreate()
+            },
+        )
+    }
+}
+
+@Composable
+private fun ActionButton(
+    buttonText: String,
+    onClick: () -> Unit = {},
+) {
+    val contentColor = if (buttonText == "생성") Color.White else Color(0xFF364153)
+    val buttonColor = if (buttonText == "생성") Color(0xFF4F39F6) else Color.White
+    val elevation = if (buttonText == "생성") 3.dp else 0.dp
+
+    Button(
+        onClick = { onClick() },
+        modifier = Modifier,
+        elevation = ButtonDefaults.buttonElevation(
+            defaultElevation = elevation,
+            pressedElevation = elevation,
+            disabledElevation = elevation,
+        ),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = buttonColor,
+            contentColor = contentColor,
+        ),
+        shape = RoundedCornerShape(20),
+    ) {
+        Text(
+            text = buttonText,
+            color = contentColor,
+            fontWeight = FontWeight.Medium,
+            fontSize = 16.sp,
+            letterSpacing = (-0.3).sp,
+            lineHeight = 24.sp,
+        )
+    }
+}
 @Composable
 private fun TitleText(
     title: String,
