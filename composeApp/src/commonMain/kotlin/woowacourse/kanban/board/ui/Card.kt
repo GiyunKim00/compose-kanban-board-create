@@ -69,7 +69,7 @@ fun Card(
         HorizontalDivider()
 
         CardAccountInfo(
-            accountName = cardData.accountName,
+            accountName = cardData.manager,
             modifier = Modifier
                 .padding(vertical = 10.dp)
                 .fillMaxWidth()
