@@ -5,8 +5,8 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
-import org.junit.Test
 import woowacourse.kanban.board.domain.CardData
+import kotlin.test.Test
 
 @OptIn(ExperimentalTestApi::class)
 class CardCreationPanelTest {
