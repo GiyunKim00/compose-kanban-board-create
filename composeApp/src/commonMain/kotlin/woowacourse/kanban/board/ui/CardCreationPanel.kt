@@ -62,6 +62,13 @@ fun CardCreationPanel(
                     value = taskTitle,
                     onTextChange = { taskTitle = it },
                 )
+
+                CardCreationPanelSection(
+                    title = "설명",
+                    placeholder = "태스크에 대한 자세한 설명을 입력하세요",
+                    value = contents,
+                    onTextChange = { contents = it },
+                )
             }
         }
 
