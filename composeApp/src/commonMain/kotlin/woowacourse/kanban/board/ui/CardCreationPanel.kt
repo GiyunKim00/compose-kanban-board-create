@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Error
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -25,6 +26,7 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,16 +42,21 @@ import woowacourse.kanban.board.domain.CardData
 
 @Composable
 fun CardCreationPanel(
+    modifier: Modifier = Modifier,
     onAddItem: (CardData) -> Unit,
     onShowCardCreationPanel: (Boolean) -> Unit,
 ) {
     var taskTitle by remember { mutableStateOf("") }
     var contents by remember { mutableStateOf("") }
-    var tags by remember { mutableStateOf("") }
+    var tempTags by remember { mutableStateOf("") }
+    val tags = CardData.parseTag(tempTags)
     var state by remember { mutableStateOf("To Do") }
     var manager by remember { mutableStateOf("다이노") }
 
-    OutlinedCard {
+
+    OutlinedCard(
+        modifier = modifier,
+    ) {
         Column(
             modifier = Modifier.background(Color.White).width(672.dp),
         ) {
@@ -67,7 +74,12 @@ fun CardCreationPanel(
                     title = "제목 *",
                     placeholder = "태스크 제목을 입력하세요",
                     value = taskTitle,
-                    onTextChange = { taskTitle = it },
+                    onTextChange = {
+                        taskTitle = it
+                    },
+                    showAdditionalInfo = !CardData.isValidText(taskTitle),
+                    infoText = CardData.getTitleInfo(),
+                    isError = !CardData.isValidText(taskTitle),
                 )
 
                 CardCreationPanelSection(
@@ -80,9 +92,12 @@ fun CardCreationPanel(
                 CardCreationPanelSection(
                     title = "태그",
                     placeholder = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
-                    value = tags,
-                    onTextChange = { tags = it },
+                    value = tempTags,
+                    onTextChange = {
+                        tempTags = it
+                    },
                     showAdditionalInfo = true,
+                    isError = !CardData.isValidTag(tempTags),
                 )
 
                 CardCreationPanelStateSection(
@@ -98,16 +113,20 @@ fun CardCreationPanel(
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
 
                 ActionButtonSection(
-                    onClick = {
-                        onShowCardCreationPanel(false)
-                    },
+                    onClick = { onShowCardCreationPanel(false) },
                     onCreate = {
-                        onAddItem(CardData.create(taskTitle, contents, tags.split(","), manager))
-                    }
+                        onAddItem(
+                            CardData.create(
+                                taskTitle,
+                                contents,
+                                tags,
+                                manager,
+                            ),
+                        )
+                    },
                 )
             }
         }
-
     }
 }
 
@@ -145,8 +164,10 @@ private fun CardCreationPanelSection(
     value: String,
     onTextChange: (String) -> Unit = {},
     showAdditionalInfo: Boolean = false,
-    infoText: String = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.",
+    infoText: String = "",
+    isError: Boolean = false,
 ) {
+    val errorColor = Color(0xFFB3261E)
     Column(
         modifier = modifier,
     ) {
@@ -165,6 +186,7 @@ private fun CardCreationPanelSection(
                 )
             },
             textStyle = TextStyle(
+                color = if (isError) errorColor else Color.Black,
                 fontSize = 16.sp,
                 lineHeight = 24.sp,
                 letterSpacing = 1.sp,
@@ -174,7 +196,7 @@ private fun CardCreationPanelSection(
         if (showAdditionalInfo) {
             Text(
                 text = infoText,
-                color = Color(0xFF49454F),
+                color = if (isError) errorColor else Color(0xFF49454F),
                 fontSize = 12.sp,
                 fontWeight = FontWeight.W400,
                 lineHeight = 16.sp,
@@ -337,9 +359,7 @@ private fun ActionButtonSection(
     ) {
         ActionButton(
             buttonText = "취소",
-            onClick = {
-                onClick()
-            },
+            onClick = { onClick() },
         )
         Spacer(modifier = Modifier.width(12.dp))
         ActionButton(
@@ -385,6 +405,7 @@ private fun ActionButton(
         )
     }
 }
+
 @Composable
 private fun TitleText(
     title: String,
