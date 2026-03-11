@@ -20,6 +20,14 @@ class CardData private constructor(
         private const val TAG_INVALID_FORMAT_MSG = "태그 형식이 올바르지 않습니다."
         private const val TAG_INVALID_RULE_MSG = "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
 
+        fun isValidText(rawText: String): Boolean {
+            return rawText.trim().isNotBlank()
+        }
+
+        fun getTitleInfo(): String {
+            return TITLE_INVALID_FORMAT_MSG
+        }
+
         /**
          * [CardData] 객체 생성 팩토리 메서드입니다.
          * @param title 필수 | 제목
