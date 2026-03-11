@@ -1,5 +1,6 @@
 package woowacourse.kanban.board.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,11 +10,17 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -68,6 +75,14 @@ fun CardCreationPanel(
                     placeholder = "태스크에 대한 자세한 설명을 입력하세요",
                     value = contents,
                     onTextChange = { contents = it },
+                )
+
+                CardCreationPanelSection(
+                    title = "태그",
+                    placeholder = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
+                    value = tags,
+                    onTextChange = { tags = it },
+                    showAdditionalInfo = true,
                 )
             }
         }
