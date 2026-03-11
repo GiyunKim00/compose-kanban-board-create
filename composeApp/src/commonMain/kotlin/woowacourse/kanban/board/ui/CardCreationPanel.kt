@@ -52,7 +52,12 @@ fun CardCreationPanel(
     val tags = CardData.parseTag(tempTags)
     var state by remember { mutableStateOf("To Do") }
     var manager by remember { mutableStateOf("다이노") }
-
+    var tagInfoText by remember { mutableStateOf("5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.") }
+    val createEnabled by remember {
+        derivedStateOf {
+            CardData.isValidText(taskTitle) && CardData.isValidTag(tempTags)
+        }
+    }
 
     OutlinedCard(
         modifier = modifier,
@@ -95,8 +100,10 @@ fun CardCreationPanel(
                     value = tempTags,
                     onTextChange = {
                         tempTags = it
+                        tagInfoText = CardData.isValidTagInfo(tempTags)
                     },
                     showAdditionalInfo = true,
+                    infoText = tagInfoText,
                     isError = !CardData.isValidTag(tempTags),
                 )
 
@@ -113,6 +120,7 @@ fun CardCreationPanel(
                 HorizontalDivider(modifier = Modifier.fillMaxWidth())
 
                 ActionButtonSection(
+                    createEnabled = createEnabled,
                     onClick = { onShowCardCreationPanel(false) },
                     onCreate = {
                         onAddItem(
@@ -176,6 +184,14 @@ private fun CardCreationPanelSection(
         OutlinedTextField(
             value = value,
             onValueChange = { onTextChange(it) },
+            trailingIcon = {
+                if (isError) Icon(
+                    imageVector = Icons.Default.Error,
+                    contentDescription = "에러 아이콘",
+                    tint = errorColor,
+                )
+            },
+            isError = isError,
             placeholder = {
                 Text(
                     text = placeholder,
@@ -348,6 +364,7 @@ private fun ManagerButton(
 
 @Composable
 private fun ActionButtonSection(
+    createEnabled: Boolean,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     onCreate: () -> Unit = {},
@@ -359,11 +376,13 @@ private fun ActionButtonSection(
     ) {
         ActionButton(
             buttonText = "취소",
+            enabled = true,
             onClick = { onClick() },
         )
         Spacer(modifier = Modifier.width(12.dp))
         ActionButton(
             buttonText = "생성",
+            enabled = createEnabled,
             onClick = {
                 onClick()
                 onCreate()
@@ -375,6 +394,7 @@ private fun ActionButtonSection(
 @Composable
 private fun ActionButton(
     buttonText: String,
+    enabled: Boolean,
     onClick: () -> Unit = {},
 ) {
     val contentColor = if (buttonText == "생성") Color.White else Color(0xFF364153)
@@ -383,6 +403,7 @@ private fun ActionButton(
 
     Button(
         onClick = { onClick() },
+        enabled = enabled,
         modifier = Modifier,
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = elevation,
