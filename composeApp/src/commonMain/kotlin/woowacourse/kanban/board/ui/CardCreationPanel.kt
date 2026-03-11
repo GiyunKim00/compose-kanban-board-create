@@ -84,6 +84,11 @@ fun CardCreationPanel(
                     onTextChange = { tags = it },
                     showAdditionalInfo = true,
                 )
+
+                CardCreationPanelStateSection(
+                    selectedState = state,
+                    onStateChange = { state = it },
+                )
             }
         }
 
@@ -160,6 +165,75 @@ private fun CardCreationPanelSection(
                 modifier = Modifier.padding(top = 4.dp),
             )
         }
+    }
+}
+
+
+@Composable
+private fun CardCreationPanelStateSection(
+    selectedState: String,
+    onStateChange: (String) -> Unit,
+) {
+    Column() {
+        TitleText("상태 *")
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            StateButton(
+                text = "To Do",
+                isSelected = selectedState == "To Do",
+                onClick = { onStateChange("To Do") },
+                modifier = Modifier.width(200.dp).height(52.dp),
+
+                )
+            StateButton(
+                text = "In Progress",
+                isSelected = selectedState == "In Progress",
+                onClick = { onStateChange("In Progress") },
+                modifier = Modifier.width(200.dp).height(52.dp),
+
+                )
+            StateButton(
+                text = "Done",
+                isSelected = selectedState == "Done",
+                onClick = { onStateChange("Done") },
+                modifier = Modifier.width(200.dp).height(52.dp),
+
+                )
+        }
+    }
+}
+
+@Composable
+private fun StateButton(
+    text: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val containerColor = if (isSelected) Color(0xFFE5E7EB) else Color.White
+    val contentColor = if (isSelected) Color(0xFF1447E6) else Color.Black
+    val borderColor = if (isSelected) Color(0xFF1447E6) else Color(0xFFE5E7EB)
+
+    OutlinedButton(
+        onClick = onClick,
+        shape = RoundedCornerShape(20),
+        border = BorderStroke(1.dp, borderColor),
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+        ),
+        modifier = modifier,
+    ) {
+        Text(
+            text = text,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            letterSpacing = (-0.3).sp,
+            lineHeight = 24.sp,
+        )
     }
 }
 
