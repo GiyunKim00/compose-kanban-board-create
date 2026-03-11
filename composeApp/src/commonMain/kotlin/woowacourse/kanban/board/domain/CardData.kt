@@ -28,6 +28,10 @@ class CardData private constructor(
             return TITLE_INVALID_FORMAT_MSG
         }
 
+        fun parseTag(tempTags: String): List<String> {
+            return tempTags.trim().split(",")
+        }
+
         /**
          * [CardData] 객체 생성 팩토리 메서드입니다.
          * @param title 필수 | 제목
