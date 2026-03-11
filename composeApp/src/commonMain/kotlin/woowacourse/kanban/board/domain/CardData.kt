@@ -9,11 +9,16 @@ class CardData private constructor(
     val title: String,
     val content: String,
     val tags: List<String>,
-    val accountName: String,
+    val manager: String,
 ) {
     companion object {
         private const val MAX_TAG_COUNT = 5
         private const val MAX_TAG_LENGTH = 5
+
+        private const val TITLE_INVALID_FORMAT_MSG = "제목을 입력해 주세요."
+        private const val TAG_VALID_FORMAT_MSG = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다."
+        private const val TAG_INVALID_FORMAT_MSG = "태그 형식이 올바르지 않습니다."
+        private const val TAG_INVALID_RULE_MSG = "태그는 5자 이내로 5개까지만 등록할 수 있습니다."
 
         /**
          * [CardData] 객체 생성 팩토리 메서드입니다.
@@ -43,7 +48,7 @@ class CardData private constructor(
                 title = title,
                 content = content,
                 tags = normalizedTags,
-                accountName = accountName,
+                manager = accountName,
             )
         }
     }
@@ -53,6 +58,7 @@ class CardData private constructor(
      * @return 내용이 공백이 아니면 true 리턴.
      */
     fun hasContent(): Boolean = content.isNotBlank()
+
     /**
      * 태그 존재 여부를 리턴합니다
      * @return 태그가 있다면 true 리턴.
