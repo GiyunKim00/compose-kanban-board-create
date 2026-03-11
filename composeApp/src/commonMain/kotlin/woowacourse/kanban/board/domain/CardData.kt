@@ -39,6 +39,16 @@ class CardData private constructor(
             return (parsedText.all { isValidText(it) } && parsedText.size <= MAX_TAG_COUNT)
         }
 
+        fun isValidTagInfo(rawText: String): String {
+            val parsedText = parseTag(rawText)
+
+            if (isValidText(rawText) && parsedText.any { isValidText(it) == false }) return TAG_INVALID_FORMAT_MSG
+
+            if (isValidText(rawText) && parsedText.size > MAX_TAG_COUNT) return TAG_INVALID_RULE_MSG
+
+            return TAG_VALID_FORMAT_MSG
+        }
+
         /**
          * [CardData] 객체 생성 팩토리 메서드입니다.
          * @param title 필수 | 제목
