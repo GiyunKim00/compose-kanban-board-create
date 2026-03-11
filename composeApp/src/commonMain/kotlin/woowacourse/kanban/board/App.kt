@@ -10,27 +10,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Devices.DESKTOP
 import androidx.compose.ui.tooling.preview.Preview
 import woowacourse.kanban.board.domain.CardData
+import woowacourse.kanban.board.ui.Board
 import woowacourse.kanban.board.ui.CardCreationPanel
 
 @Composable
-@Preview
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, device = DESKTOP)
 fun App() {
     MaterialTheme {
-        val kanbanBoardCards = remember { mutableStateListOf<CardData>() }
-        var showInputWindow by remember { mutableStateOf(false) }
-
-        Box(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-
-            if (showInputWindow) {
-                CardCreationPanel(
-                    onAddItem = { kanbanBoardCards.add(it) },
-                    onShowInputWindow = { showInputWindow = it },
-                )
-            }
-        }
+        Board()
     }
 }
