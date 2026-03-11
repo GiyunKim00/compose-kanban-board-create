@@ -32,6 +32,13 @@ class CardData private constructor(
             return tempTags.trim().split(",")
         }
 
+        fun isValidTag(rawText: String): Boolean {
+            if (rawText.isBlank()) return true
+
+            val parsedText = parseTag(rawText)
+            return (parsedText.all { isValidText(it) } && parsedText.size <= MAX_TAG_COUNT)
+        }
+
         /**
          * [CardData] 객체 생성 팩토리 메서드입니다.
          * @param title 필수 | 제목
