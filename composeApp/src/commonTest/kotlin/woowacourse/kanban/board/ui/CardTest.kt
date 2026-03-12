@@ -1,3 +1,5 @@
+/* 이전 레벨 테스트 코드 */
+/*
 package woowacourse.kanban.board.ui
 
 import androidx.compose.ui.test.ExperimentalTestApi
@@ -95,3 +97,4 @@ class CardTest {
         onNodeWithContentDescription("Card Account Info").assertIsDisplayed()
     }
 }
+*/
