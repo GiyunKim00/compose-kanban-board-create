@@ -39,6 +39,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.domain.CardData
+import woowacourse.kanban.board.domain.CardManagerState
+import woowacourse.kanban.board.domain.CardTaskState
 
 @Composable
 fun CardCreationPanel(
@@ -50,8 +52,8 @@ fun CardCreationPanel(
     var contents by remember { mutableStateOf("") }
     var tempTags by remember { mutableStateOf("") }
     val tags = CardData.parseTag(tempTags)
-    var state by remember { mutableStateOf("To Do") }
-    var manager by remember { mutableStateOf("다이노") }
+    var state by remember { mutableStateOf(CardTaskState.TODO) }
+    var manager by remember { mutableStateOf(CardManagerState.DINO) }
     var tagInfoText by remember { mutableStateOf("5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.") }
     val createEnabled by remember {
         derivedStateOf {
@@ -129,6 +131,7 @@ fun CardCreationPanel(
                                 contents,
                                 tags,
                                 manager,
+                                state,
                             ),
                         )
                     },
@@ -225,37 +228,26 @@ private fun CardCreationPanelSection(
 
 @Composable
 private fun CardCreationPanelStateSection(
-    selectedState: String,
-    onStateChange: (String) -> Unit,
+    selectedState: CardTaskState,
+    onStateChange: (CardTaskState) -> Unit,
 ) {
-    Column() {
+    Column {
         TitleText("상태 *")
         Spacer(modifier = Modifier.height(8.dp))
         Row(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            StateButton(
-                text = "To Do",
-                isSelected = selectedState == "To Do",
-                onClick = { onStateChange("To Do") },
-                modifier = Modifier.width(200.dp).height(52.dp),
-
+            CardTaskState.entries.forEach { state ->
+                StateButton(
+                    text = state.taskState,
+                    isSelected = selectedState == state,
+                    onClick = { onStateChange(state) },
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(52.dp),
                 )
-            StateButton(
-                text = "In Progress",
-                isSelected = selectedState == "In Progress",
-                onClick = { onStateChange("In Progress") },
-                modifier = Modifier.width(200.dp).height(52.dp),
-
-                )
-            StateButton(
-                text = "Done",
-                isSelected = selectedState == "Done",
-                onClick = { onStateChange("Done") },
-                modifier = Modifier.width(200.dp).height(52.dp),
-
-                )
+            }
         }
     }
 }
@@ -293,27 +285,25 @@ private fun StateButton(
 
 @Composable
 private fun CardCreationPanelManagerSection(
-    selectedManager: String,
-    onManagerChange: (String) -> Unit,
+    selectedManager: CardManagerState,
+    onManagerChange: (CardManagerState) -> Unit,
 ) {
-    Column() {
+    Column {
         TitleText("담당자 *")
         Spacer(modifier = Modifier.height(8.dp))
         Row(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            ManagerButton(
-                text = "다이노",
-                isSelected = selectedManager == "다이노",
-                onClick = { onManagerChange("다이노") },
-                modifier = Modifier.width(200.dp).height(68.dp),
-            )
-            ManagerButton(
-                text = "페임스",
-                isSelected = selectedManager == "페임스",
-                onClick = { onManagerChange("페임스") },
-                modifier = Modifier.width(200.dp).height(68.dp),
-            )
+            CardManagerState.entries.forEach { manager ->
+                ManagerButton(
+                    text = manager.managerName,
+                    isSelected = selectedManager == manager,
+                    onClick = { onManagerChange(manager) },
+                    modifier = Modifier
+                        .width(200.dp)
+                        .height(68.dp),
+                )
+            }
         }
     }
 }

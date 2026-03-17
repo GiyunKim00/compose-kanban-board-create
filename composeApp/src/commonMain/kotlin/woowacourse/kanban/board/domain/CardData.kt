@@ -9,7 +9,8 @@ class CardData private constructor(
     val title: String,
     val content: String,
     val tags: List<String>,
-    val manager: String,
+    val manager: CardManagerState,
+    val state: CardTaskState,
 ) {
     companion object {
         private const val MAX_TAG_COUNT = 5
@@ -54,17 +55,19 @@ class CardData private constructor(
          * @param title 필수 | 제목
          * @param content 본문
          * @param tags 태그
-         * @param accountName 필수 | 계정명
+         * @param manager 필수 | 계정명
+         * @param state 필수 | 업무 상태
          * @throws IllegalArgumentException 기능 요구사항을 충족하지 않을 경우 예외를 던집니다.
          */
         fun create(
             title: String,
             content: String,
             tags: List<String>,
-            accountName: String,
+            manager: CardManagerState,
+            state: CardTaskState,
         ): CardData {
             require(title.isNotBlank()) { "[Card] 제목은 필수 입력 항목입니다." }
-            require(accountName.isNotBlank()) { "[Card] 계정명은 필수 입력 항목입니다." }
+            require(manager.managerName.isNotBlank()) { "[Card] 계정명은 필수 입력 항목입니다." }
 
             val normalizedTags = tags
                 .map { it.trim() }
@@ -77,7 +80,8 @@ class CardData private constructor(
                 title = title,
                 content = content,
                 tags = normalizedTags,
-                manager = accountName,
+                manager = manager,
+                state = state,
             )
         }
     }
