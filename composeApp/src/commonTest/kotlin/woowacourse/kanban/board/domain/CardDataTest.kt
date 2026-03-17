@@ -17,7 +17,8 @@ class CardDataTest {
                 title = "   ",
                 content = "내용",
                 tags = listOf("태그1"),
-                accountName = "테스트 계정",
+                manager = CardManagerState.DINO,
+                state = CardTaskState.TODO
             )
         }
     }
@@ -29,7 +30,8 @@ class CardDataTest {
                 title = "제목",
                 content = "내용",
                 tags = listOf("태그1"),
-                accountName = "    ",
+                manager = CardManagerState.valueOf("   "),
+                state = CardTaskState.TODO
             )
         }
     }
@@ -40,7 +42,8 @@ class CardDataTest {
             title = "제목",
             content = "내용",
             tags = emptyList(),
-            accountName = "테스트 계정",
+            manager = CardManagerState.DINO,
+            state = CardTaskState.TODO
         )
 
         assertTrue(cardData.hasContent())
@@ -52,7 +55,8 @@ class CardDataTest {
             title = "제목",
             content = "   ",
             tags = emptyList(),
-            accountName = "테스트 계정",
+            manager = CardManagerState.DINO,
+            state = CardTaskState.TODO
         )
 
         assertFalse(cardData.hasContent())
@@ -64,7 +68,8 @@ class CardDataTest {
             title = "제목",
             content = "내용",
             tags = listOf(" 태그1 ", "  태그2  "),
-            accountName = "테스트 계정",
+            manager = CardManagerState.DINO,
+            state = CardTaskState.TODO
         )
 
         assertEquals(listOf("태그1", "태그2"), cardData.tags)
@@ -76,7 +81,8 @@ class CardDataTest {
             title = "제목",
             content = "내용",
             tags = listOf("태그1", "   ", "", "  "),
-            accountName = "테스트 계정",
+            manager = CardManagerState.DINO,
+            state = CardTaskState.TODO
         )
 
         assertEquals(listOf("태그1"), cardData.tags)
@@ -89,7 +95,8 @@ class CardDataTest {
                 title = "제목",
                 content = "내용",
                 tags = listOf("태그1", "태그2", "태그3", "태그4", "태그5", "태그6"),
-                accountName = "테스트 계정",
+                manager = CardManagerState.DINO,
+                state = CardTaskState.TODO
             )
         }
     }
@@ -101,7 +108,8 @@ class CardDataTest {
                 title = "제목",
                 content = "내용",
                 tags = listOf("우아한테크코스", "안드로이드8기", "칸반보드리팩터링"),
-                accountName = "테스트 계정",
+                manager = CardManagerState.DINO,
+                state = CardTaskState.TODO
             )
         }
     }
@@ -112,7 +120,8 @@ class CardDataTest {
             title = "제목",
             content = "내용",
             tags = listOf("태그1", "   "),
-            accountName = "테스트 계정",
+            manager = CardManagerState.DINO,
+            state = CardTaskState.TODO
         )
 
         assertTrue(cardData.hasTag())
@@ -124,7 +133,8 @@ class CardDataTest {
             title = "제목",
             content = "내용",
             tags = listOf("   ", ""),
-            accountName = "테스트 계정",
+            manager = CardManagerState.DINO,
+            state = CardTaskState.TODO
         )
 
         assertFalse(cardData.hasTag())
