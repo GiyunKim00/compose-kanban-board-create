@@ -67,7 +67,6 @@ class CardData private constructor(
             state: CardTaskState,
         ): CardData {
             require(title.isNotBlank()) { "[Card] 제목은 필수 입력 항목입니다." }
-            require(manager.managerName.isNotBlank()) { "[Card] 계정명은 필수 입력 항목입니다." }
 
             val normalizedTags = tags
                 .map { it.trim() }

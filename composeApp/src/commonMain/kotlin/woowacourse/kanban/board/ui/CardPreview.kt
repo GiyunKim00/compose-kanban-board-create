@@ -47,7 +47,7 @@ private class CardPreviewParameterProvider : PreviewParameterProvider<CardData> 
         CardData.create(
             title = "너무너무 긴 제목은 한 줄까지만 노출너무너무 긴 제목은 한 줄까지만 노출",
             content = "너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노너무너무너무 긴 설명은 두 줄까지만 노출하고 말줄임표로 처리합니다 두 줄까지만 노",
-            tags = listOf("너무너무", "긴 태그", "최대로", "5자까지진짜로", "5개제한임", "6개"),
+            tags = listOf("너무너무", "긴 태그", "최대로", "5자까지진", "5개제한임"), /* 도메인 내 require문 수정에 따른 Tag 수정*/
             manager = CardManagerState.DINO,
             state = CardTaskState.TODO,
         ),
