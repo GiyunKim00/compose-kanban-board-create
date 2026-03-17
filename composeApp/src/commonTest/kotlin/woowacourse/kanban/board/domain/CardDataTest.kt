@@ -11,28 +11,19 @@ import kotlin.test.assertTrue
  */
 class CardDataTest {
     @Test
-    fun `제목이 공백만 있으면 생성할 수 없다`() {
-        assertFailsWith<IllegalArgumentException> {
-            CardData.create(
-                title = "   ",
-                content = "내용",
-                tags = listOf("태그1"),
-                manager = CardManagerState.DINO,
-                state = CardTaskState.TODO
-            )
-        }
-    }
+    fun `제목이 공백 문자만 있으면 생성할 수 없다`() {
+        val invalidTitles = listOf("   ", "\t", "\n", " \n\t ")
 
-    @Test
-    fun `계정명이 공백만 있으면 생성할 수 없다`() {
-        assertFailsWith<IllegalArgumentException> {
-            CardData.create(
-                title = "제목",
-                content = "내용",
-                tags = listOf("태그1"),
-                manager = CardManagerState.valueOf("   "),
-                state = CardTaskState.TODO
-            )
+        invalidTitles.forEach { title ->
+            assertFailsWith<IllegalArgumentException> {
+                CardData.create(
+                    title = title,
+                    content = "",
+                    tags = emptyList(),
+                    manager = CardManagerState.DINO,
+                    state = CardTaskState.TODO,
+                )
+            }
         }
     }
 
@@ -43,7 +34,7 @@ class CardDataTest {
             content = "내용",
             tags = emptyList(),
             manager = CardManagerState.DINO,
-            state = CardTaskState.TODO
+            state = CardTaskState.TODO,
         )
 
         assertTrue(cardData.hasContent())
@@ -56,7 +47,7 @@ class CardDataTest {
             content = "   ",
             tags = emptyList(),
             manager = CardManagerState.DINO,
-            state = CardTaskState.TODO
+            state = CardTaskState.TODO,
         )
 
         assertFalse(cardData.hasContent())
@@ -69,7 +60,7 @@ class CardDataTest {
             content = "내용",
             tags = listOf(" 태그1 ", "  태그2  "),
             manager = CardManagerState.DINO,
-            state = CardTaskState.TODO
+            state = CardTaskState.TODO,
         )
 
         assertEquals(listOf("태그1", "태그2"), cardData.tags)
@@ -82,7 +73,7 @@ class CardDataTest {
             content = "내용",
             tags = listOf("태그1", "   ", "", "  "),
             manager = CardManagerState.DINO,
-            state = CardTaskState.TODO
+            state = CardTaskState.TODO,
         )
 
         assertEquals(listOf("태그1"), cardData.tags)
@@ -96,7 +87,7 @@ class CardDataTest {
                 content = "내용",
                 tags = listOf("태그1", "태그2", "태그3", "태그4", "태그5", "태그6"),
                 manager = CardManagerState.DINO,
-                state = CardTaskState.TODO
+                state = CardTaskState.TODO,
             )
         }
     }
@@ -109,7 +100,7 @@ class CardDataTest {
                 content = "내용",
                 tags = listOf("우아한테크코스", "안드로이드8기", "칸반보드리팩터링"),
                 manager = CardManagerState.DINO,
-                state = CardTaskState.TODO
+                state = CardTaskState.TODO,
             )
         }
     }
@@ -121,7 +112,7 @@ class CardDataTest {
             content = "내용",
             tags = listOf("태그1", "   "),
             manager = CardManagerState.DINO,
-            state = CardTaskState.TODO
+            state = CardTaskState.TODO,
         )
 
         assertTrue(cardData.hasTag())
@@ -134,7 +125,7 @@ class CardDataTest {
             content = "내용",
             tags = listOf("   ", ""),
             manager = CardManagerState.DINO,
-            state = CardTaskState.TODO
+            state = CardTaskState.TODO,
         )
 
         assertFalse(cardData.hasTag())
