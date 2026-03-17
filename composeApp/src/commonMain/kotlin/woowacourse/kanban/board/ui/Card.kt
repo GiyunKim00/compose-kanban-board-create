@@ -44,26 +44,41 @@ fun Card(
 ) {
     Column(
         modifier = modifier
-            .background(color = Color(0xffffffff), shape = RoundedCornerShape(16.dp))
-            .border(color = Color(0xffE5E7Eb), width = 1.dp, shape = RoundedCornerShape(16.dp))
+            .background(
+                color = Color(0xffffffff),
+                shape = RoundedCornerShape(16.dp)
+            )
+            .border(
+                color = Color(0xffE5E7Eb),
+                width = 1.dp,
+                shape = RoundedCornerShape(16.dp)
+            )
             .padding(all = 17.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
 
         CardTitle(
             title = cardData.title,
-            modifier = Modifier.fillMaxWidth().semantics { contentDescription = "Kanban Card Title" },
+            modifier = Modifier
+                .fillMaxWidth()
+                .semantics {
+                    contentDescription = "Kanban Card Title"
+                },
         )
 
         if (cardData.hasContent()) {
             CardContent(
-                modifier = Modifier.fillMaxWidth().semantics { contentDescription = "Kanban Card Content" },
-                content = cardData.content
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .semantics {
+                        contentDescription = "Kanban Card Content"
+                    },
+                content = cardData.content,
             )
         }
 
         if (cardData.hasTag()) CardTagsSection(
-            tags = cardData.tags
+            tags = cardData.tags,
         )
 
         HorizontalDivider()
@@ -73,7 +88,9 @@ fun Card(
             modifier = Modifier
                 .padding(vertical = 10.dp)
                 .fillMaxWidth()
-                .semantics { contentDescription = "Kanban Card Account Info" },
+                .semantics {
+                    contentDescription = "Kanban Card Account Info"
+                },
             accountImage = Icons.Default.AccountCircle, /* 추후 api나, Async 등으로 이미지를 불러올 경우 수정할 예정. */
         )
     }
@@ -140,7 +157,14 @@ private fun CardTagsSection(tags: List<String> = listOf()) {
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {/* TagModifer, SectionModifier로 분리할까 고민했으나, 우선 현 방식대로 수정. */
-        tags.forEach { TagChip(modifier = Modifier.semantics { contentDescription = "Kanban Card Tag" }, chipContent = it) }
+        tags.forEach {
+            TagChip(
+                modifier = Modifier.semantics {
+                    contentDescription = "Kanban Card Tag"
+                },
+                chipContent = it,
+            )
+        }
     }
 }
 
@@ -154,7 +178,10 @@ private fun TagChip(modifier: Modifier = Modifier, chipContent: String) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .background(color = Color(0xfff3f4f6), shape = RoundedCornerShape(16.dp))
+            .background(
+                color = Color(0xfff3f4f6),
+                shape = RoundedCornerShape(16.dp)
+            )
             .padding(vertical = 5.dp, horizontal = 8.dp),
     ) {
         Text(text = chipContent, fontWeight = FontWeight.W400, fontSize = 12.sp)
