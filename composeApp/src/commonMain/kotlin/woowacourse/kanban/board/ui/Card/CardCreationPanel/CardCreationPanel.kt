@@ -86,6 +86,7 @@ fun CardCreationPanel(
                         taskTitle = it
                     },
                     showAdditionalInfo = !CardData.isValidText(taskTitle),
+                    testTag = "titleTextField",
                     infoText = CardData.getTitleInfo(),
                     isError = !CardData.isValidText(taskTitle),
                 )
@@ -95,7 +96,8 @@ fun CardCreationPanel(
                     placeholder = "태스크에 대한 자세한 설명을 입력하세요",
                     value = contents,
                     onTextChange = { contents = it },
-                )
+                    testTag = "descriptionTextField",
+                    )
 
                 CardCreationPanelFormSection(
                     title = "태그",
@@ -106,6 +108,7 @@ fun CardCreationPanel(
                         tagInfoText = CardData.isValidTagInfo(tempTags)
                     },
                     showAdditionalInfo = true,
+                    testTag = "tagTextField",
                     infoText = tagInfoText,
                     isError = !CardData.isValidTag(tempTags),
                 )

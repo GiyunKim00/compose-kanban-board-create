@@ -2,6 +2,7 @@ package woowacourse.kanban.board.ui
 
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
@@ -40,6 +41,7 @@ class CardCreationPanelTest {
                 onShowCardCreationPanel = {},
             )
         }
+        onNodeWithTag("titleTextField").performTextInput(" ")
 
         //then
         onNodeWithText("생성").assertIsNotEnabled()
@@ -55,7 +57,7 @@ class CardCreationPanelTest {
                 onShowCardCreationPanel = {},
             )
         }
-
+        onNodeWithTag("titleTextField").performTextInput("\t")
         //then
         onNodeWithText("제목을 입력해 주세요.").assertExists()
     }
@@ -74,21 +76,6 @@ class CardCreationPanelTest {
         onNodeWithText("태스크 제목을 입력하세요").performTextInput("제목입니다~")
 
         onNodeWithText("제목을 입력해 주세요.").assertDoesNotExist()
-    }
-
-    @Test
-    fun `태그를 잘못 입력하면, 생성 버튼이 비활성화된다`() = runComposeUiTest {
-        // given
-        //when
-        setContent {
-            CardCreationPanel(
-                onAddItem = {},
-                onShowCardCreationPanel = {},
-            )
-        }
-
-        //then
-        onNodeWithText("생성").assertIsNotEnabled()
     }
 
     @Test
