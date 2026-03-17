@@ -41,6 +41,10 @@ import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.domain.CardData
 import woowacourse.kanban.board.domain.CardManagerState
 import woowacourse.kanban.board.domain.CardTaskState
+import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultBackground
+import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultContent
+import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedBackground
+import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedContent
 
 @Composable
 fun CardCreationPanel(
@@ -65,7 +69,7 @@ fun CardCreationPanel(
         modifier = modifier,
     ) {
         Column(
-            modifier = Modifier.background(Color.White).width(672.dp),
+            modifier = Modifier.background(DefaultBackground).width(672.dp),
         ) {
             CardCreationPanelHeaderSection(
                 onShowCardCreationPanel = onShowCardCreationPanel,
@@ -205,7 +209,7 @@ private fun CardCreationPanelSection(
                 )
             },
             textStyle = TextStyle(
-                color = if (isError) errorColor else Color.Black,
+                color = if (isError) errorColor else DefaultContent,
                 fontSize = 16.sp,
                 lineHeight = 24.sp,
                 letterSpacing = 1.sp,
@@ -259,9 +263,9 @@ private fun StateButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val containerColor = if (isSelected) Color(0xFFE5E7EB) else Color.White
-    val contentColor = if (isSelected) Color(0xFF1447E6) else Color.Black
-    val borderColor = if (isSelected) Color(0xFF1447E6) else Color(0xFFE5E7EB)
+    val containerColor = if (isSelected) SelectedBackground else DefaultBackground
+    val contentColor = if (isSelected) SelectedContent else DefaultContent
+    val borderColor = if (isSelected) SelectedContent else SelectedBackground
 
     OutlinedButton(
         onClick = onClick,
@@ -315,9 +319,9 @@ private fun ManagerButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val containerColor = if (isSelected) Color(0xFFE5E7EB) else Color.White
-    val contentColor = if (isSelected) Color(0xFF1447E6) else Color.Black
-    val borderColor = if (isSelected) Color(0xFF1447E6) else Color(0xFFE5E7EB)
+    val containerColor = if (isSelected) SelectedBackground else DefaultBackground
+    val contentColor = if (isSelected) SelectedContent else DefaultContent
+    val borderColor = if (isSelected) SelectedContent else SelectedBackground
 
     OutlinedButton(
         onClick = onClick,
@@ -387,8 +391,8 @@ private fun ActionButton(
     enabled: Boolean,
     onClick: () -> Unit = {},
 ) {
-    val contentColor = if (buttonText == "생성") Color.White else Color(0xFF364153)
-    val buttonColor = if (buttonText == "생성") Color(0xFF4F39F6) else Color.White
+    val contentColor = if (buttonText == "생성") DefaultBackground else Color(0xFF364153)
+    val buttonColor = if (buttonText == "생성") Color(0xFF4F39F6) else DefaultBackground
     val elevation = if (buttonText == "생성") 3.dp else 0.dp
 
     Button(
