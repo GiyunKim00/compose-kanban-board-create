@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui
+package woowacourse.kanban.board.ui.Card.CardCreationPanel
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -16,14 +16,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Error
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -34,7 +31,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -82,7 +78,7 @@ fun CardCreationPanel(
                 modifier = Modifier.padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(24.dp),
             ) {
-                CardCreationPanelSection(
+                CardCreationPanelFormSection(
                     title = "제목 *",
                     placeholder = "태스크 제목을 입력하세요",
                     value = taskTitle,
@@ -94,14 +90,14 @@ fun CardCreationPanel(
                     isError = !CardData.isValidText(taskTitle),
                 )
 
-                CardCreationPanelSection(
+                CardCreationPanelFormSection(
                     title = "설명",
                     placeholder = "태스크에 대한 자세한 설명을 입력하세요",
                     value = contents,
                     onTextChange = { contents = it },
                 )
 
-                CardCreationPanelSection(
+                CardCreationPanelFormSection(
                     title = "태그",
                     placeholder = "태그를 쉼표로 구분하여 입력하세요 (예: 버그, 긴급)",
                     value = tempTags,
@@ -172,65 +168,6 @@ private fun CardCreationPanelHeaderSection(
         )
     }
 }
-
-@Composable
-private fun CardCreationPanelSection(
-    title: String,
-    modifier: Modifier = Modifier,
-    placeholder: String = "",
-    value: String,
-    onTextChange: (String) -> Unit = {},
-    showAdditionalInfo: Boolean = false,
-    infoText: String = "",
-    isError: Boolean = false,
-) {
-    val errorColor = Color(0xFFB3261E)
-    Column(
-        modifier = modifier,
-    ) {
-        TitleText(title)
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedTextField(
-            value = value,
-            onValueChange = { onTextChange(it) },
-            trailingIcon = {
-                if (isError) Icon(
-                    imageVector = Icons.Default.Error,
-                    contentDescription = "에러 아이콘",
-                    tint = errorColor,
-                )
-            },
-            isError = isError,
-            placeholder = {
-                Text(
-                    text = placeholder,
-                    color = Color(0xFFAAAAAA),
-                    fontSize = 16.sp,
-                    lineHeight = 24.sp,
-                    letterSpacing = 1.sp,
-                )
-            },
-            textStyle = TextStyle(
-                color = if (isError) errorColor else DefaultContent,
-                fontSize = 16.sp,
-                lineHeight = 24.sp,
-                letterSpacing = 1.sp,
-            ),
-            modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-        )
-        if (showAdditionalInfo) {
-            Text(
-                text = infoText,
-                color = if (isError) errorColor else Color(0xFF49454F),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.W400,
-                lineHeight = 16.sp,
-                modifier = Modifier.padding(top = 4.dp),
-            )
-        }
-    }
-}
-
 
 @Composable
 private fun CardCreationPanelStateSection(
@@ -382,49 +319,4 @@ private fun ActionButtonSection(
             onClick = onCreateClick,
         )
     }
-}
-
-@Composable
-private fun ActionButton(
-    buttonType: ActionButtonType,
-    enabled: Boolean,
-    onClick: () -> Unit = {},
-) {
-    Button(
-        onClick = onClick,
-        enabled = enabled,
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = buttonType.elevation,
-            pressedElevation = buttonType.elevation,
-            disabledElevation = buttonType.elevation,
-        ),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = buttonType.containerColor,
-            contentColor = buttonType.contentColor,
-        ),
-        shape = RoundedCornerShape(20),
-    ) {
-        Text(
-            text = buttonType.buttonText,
-            color = buttonType.contentColor,
-            fontWeight = FontWeight.Medium,
-            fontSize = 16.sp,
-            letterSpacing = (-0.3).sp,
-            lineHeight = 24.sp,
-        )
-    }
-}
-
-@Composable
-private fun TitleText(
-    title: String,
-) {
-    Text(
-        text = title,
-        fontSize = 14.sp,
-        color = Color(0xFF364153),
-        fontWeight = FontWeight.Medium,
-        lineHeight = 20.sp,
-        letterSpacing = 0.15.sp,
-    )
 }
