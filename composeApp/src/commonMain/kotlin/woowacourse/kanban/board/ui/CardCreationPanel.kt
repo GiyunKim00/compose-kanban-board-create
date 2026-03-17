@@ -38,6 +38,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import woowacourse.kanban.board.domain.ActionButtonType
 import woowacourse.kanban.board.domain.CardData
 import woowacourse.kanban.board.domain.CardManagerState
 import woowacourse.kanban.board.domain.CardTaskState
@@ -127,17 +128,18 @@ fun CardCreationPanel(
 
                 ActionButtonSection(
                     createEnabled = createEnabled,
-                    onClick = { onShowCardCreationPanel(false) },
-                    onCreate = {
+                    onCancelClick = { onShowCardCreationPanel(false) },
+                    onCreateClick = {
                         onAddItem(
                             CardData.create(
-                                taskTitle,
-                                contents,
-                                tags,
-                                manager,
-                                state,
+                                title = taskTitle,
+                                content = contents,
+                                tags = tags,
+                                manager = manager,
+                                state = state,
                             ),
                         )
+                        onShowCardCreationPanel(false)
                     },
                 )
             }
@@ -360,8 +362,8 @@ private fun ManagerButton(
 private fun ActionButtonSection(
     createEnabled: Boolean,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
-    onCreate: () -> Unit = {},
+    onCancelClick: () -> Unit,
+    onCreateClick: () -> Unit,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -369,50 +371,42 @@ private fun ActionButtonSection(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         ActionButton(
-            buttonText = "취소",
+            buttonType = ActionButtonType.SECONDARY,
             enabled = true,
-            onClick = { onClick() },
+            onClick = onCancelClick,
         )
         Spacer(modifier = Modifier.width(12.dp))
         ActionButton(
-            buttonText = "생성",
+            buttonType = ActionButtonType.PRIMARY,
             enabled = createEnabled,
-            onClick = {
-                onClick()
-                onCreate()
-            },
+            onClick = onCreateClick,
         )
     }
 }
 
 @Composable
 private fun ActionButton(
-    buttonText: String,
+    buttonType: ActionButtonType,
     enabled: Boolean,
     onClick: () -> Unit = {},
 ) {
-    val contentColor = if (buttonText == "생성") DefaultBackground else Color(0xFF364153)
-    val buttonColor = if (buttonText == "생성") Color(0xFF4F39F6) else DefaultBackground
-    val elevation = if (buttonText == "생성") 3.dp else 0.dp
-
     Button(
-        onClick = { onClick() },
+        onClick = onClick,
         enabled = enabled,
-        modifier = Modifier,
         elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = elevation,
-            pressedElevation = elevation,
-            disabledElevation = elevation,
+            defaultElevation = buttonType.elevation,
+            pressedElevation = buttonType.elevation,
+            disabledElevation = buttonType.elevation,
         ),
         colors = ButtonDefaults.buttonColors(
-            containerColor = buttonColor,
-            contentColor = contentColor,
+            containerColor = buttonType.containerColor,
+            contentColor = buttonType.contentColor,
         ),
         shape = RoundedCornerShape(20),
     ) {
         Text(
-            text = buttonText,
-            color = contentColor,
+            text = buttonType.buttonText,
+            color = buttonType.contentColor,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
             letterSpacing = (-0.3).sp,
