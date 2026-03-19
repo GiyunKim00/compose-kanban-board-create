@@ -34,10 +34,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import woowacourse.kanban.board.domain.ActionButtonType
-import woowacourse.kanban.board.domain.Card
-import woowacourse.kanban.board.domain.CardManagerState
-import woowacourse.kanban.board.domain.CardTaskState
+import woowacourse.kanban.board.domain.Card.ActionButtonType
+import woowacourse.kanban.board.domain.Card.Card
+import woowacourse.kanban.board.domain.Card.CardManagerState
+import woowacourse.kanban.board.domain.Card.CardTaskState
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultBackground
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultContent
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedBackground

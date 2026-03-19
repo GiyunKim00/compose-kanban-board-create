@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.domain
+package woowacourse.kanban.board.domain.Card
 
 /**
  * Card 도메인 모델입니다.

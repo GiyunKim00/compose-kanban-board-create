@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import woowacourse.kanban.board.domain.ActionButtonType
+import woowacourse.kanban.board.domain.Card.ActionButtonType
 
 @Composable
 fun ActionButton(

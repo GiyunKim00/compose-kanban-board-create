@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.domain
+package woowacourse.kanban.board.domain.Card
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp

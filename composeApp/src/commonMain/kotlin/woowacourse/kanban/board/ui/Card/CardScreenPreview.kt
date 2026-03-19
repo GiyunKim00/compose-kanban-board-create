@@ -7,9 +7,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import woowacourse.kanban.board.domain.Card
-import woowacourse.kanban.board.domain.CardManagerState
-import woowacourse.kanban.board.domain.CardTaskState
+import woowacourse.kanban.board.domain.Card.Card
+import woowacourse.kanban.board.domain.Card.CardManagerState
+import woowacourse.kanban.board.domain.Card.CardTaskState
 
 /**
  * 여러 케이스에 따른 KanbanCard의 Preview를 모아볼 수 있습니다.

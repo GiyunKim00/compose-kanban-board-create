@@ -1,4 +1,7 @@
-package woowacourse.kanban.board.domain
+package woowacourse.kanban.board.domain.Board
+
+import woowacourse.kanban.board.domain.Card.Card
+import woowacourse.kanban.board.domain.Card.CardTaskState
 
 class Board(
     private val cardList: List<Card> = emptyList(),

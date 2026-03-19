@@ -1,5 +1,8 @@
 package woowacourse.kanban.board.domain
 
+import woowacourse.kanban.board.domain.Card.Card
+import woowacourse.kanban.board.domain.Card.CardManagerState
+import woowacourse.kanban.board.domain.Card.CardTaskState
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -7,7 +10,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 /**
- * [Card] Unit 테스트 클래스입니다.
+ * [woowacourse.kanban.board.domain.Card.Card] Unit 테스트 클래스입니다.
  */
 class CardDataTest {
     @Test

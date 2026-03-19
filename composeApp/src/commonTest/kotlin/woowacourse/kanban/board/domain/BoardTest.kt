@@ -2,6 +2,10 @@ package woowacourse.kanban.board.domain
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.assertj.core.api.Assertions.assertThat
+import woowacourse.kanban.board.domain.Board.Board
+import woowacourse.kanban.board.domain.Card.Card
+import woowacourse.kanban.board.domain.Card.CardManagerState
+import woowacourse.kanban.board.domain.Card.CardTaskState
 import kotlin.test.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
