@@ -9,7 +9,7 @@ class BoardTest {
 
     @Test
     fun `보드에 카드를 추가할 수 있다`(){
-        val card = CardData.create(
+        val card = Card.create(
             title = "제목",
             content = "내용내용",
             tags = listOf("태그"),
@@ -25,14 +25,14 @@ class BoardTest {
 
     @Test
     fun `보드에 카드를 삭제할 수 있다`() {
-        val card1 = CardData.create(
+        val card1 = Card.create(
             title = "제목1",
             content = "내용내용1",
             tags = listOf("태그1"),
             manager = CardManagerState.DINO,
             state = CardTaskState.TODO
         )
-        val card2 = CardData.create(
+        val card2 = Card.create(
             title = "제목2",
             content = "내용내용2",
             tags = listOf("태그2"),
@@ -48,14 +48,14 @@ class BoardTest {
 
     @Test
     fun `보드에 카드를 수정할 수 있다`() {
-        val card1 = CardData.create(
+        val card1 = Card.create(
             title = "제목1",
             content = "내용내용1",
             tags = listOf("태그1"),
             manager = CardManagerState.DINO,
             state = CardTaskState.TODO
         )
-        val card2 = CardData.create(
+        val card2 = Card.create(
             title = "제목2",
             content = "내용내용2",
             tags = listOf("태그2"),
@@ -63,7 +63,7 @@ class BoardTest {
             state = CardTaskState.TODO
         )
         var board = Board().addCard(card1).addCard(card2)
-        val updatedCard = CardData.create(
+        val updatedCard = Card.create(
             title = "수정제목1",
             content = "수정내용내용",
             tags = listOf("수정태그"),
@@ -80,28 +80,28 @@ class BoardTest {
     @Test
     fun `state에 따라 Card가 분류된다`() {
         val cardList = listOf(
-            CardData.create(
+            Card.create(
                 title = "제목1",
                 content = "내용내용1",
                 tags = listOf("태그1"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.TODO
             ),
-            CardData.create(
+            Card.create(
                 title = "제목2",
                 content = "내용내용2",
                 tags = listOf("태그2"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.TODO
             ),
-            CardData.create(
+            Card.create(
                 title = "제목3",
                 content = "내용내용3",
                 tags = listOf("태그3"),
                 manager = CardManagerState.FAMES,
                 state = CardTaskState.IN_PROGRESS
             ),
-            CardData.create(
+            Card.create(
                 title = "제목4",
                 content = "내용내용4",
                 tags = listOf("태그4"),
@@ -137,21 +137,21 @@ class BoardTest {
     @Test
     fun `전체 카드 3개 중 1개만 완료되었다면 완료율은 33%이다`() {
         val cardList = listOf(
-            CardData.create(
+            Card.create(
                 title = "제목1",
                 content = "내용내용1",
                 tags = listOf("태그1"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.TODO
             ),
-            CardData.create(
+            Card.create(
                 title = "제목2",
                 content = "내용내용2",
                 tags = listOf("태그2"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.IN_PROGRESS
             ),
-            CardData.create(
+            Card.create(
                 title = "제목3",
                 content = "내용내용3",
                 tags = listOf("태그3"),
@@ -167,21 +167,21 @@ class BoardTest {
     @Test
     fun `카드 상태가 모두 완료되었다면 완료율은 100%이다`() {
         val cardList = listOf(
-            CardData.create(
+            Card.create(
                 title = "제목1",
                 content = "내용내용1",
                 tags = listOf("태그1"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.DONE
             ),
-            CardData.create(
+            Card.create(
                 title = "제목2",
                 content = "내용내용2",
                 tags = listOf("태그2"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.DONE
             ),
-            CardData.create(
+            Card.create(
                 title = "제목3",
                 content = "내용내용3",
                 tags = listOf("태그3"),
@@ -197,21 +197,21 @@ class BoardTest {
     @Test
     fun `중간에 카드를 삭제하거나 추가할 시 완료율이 변경된다`() {
         val cardList = listOf(
-            CardData.create(
+            Card.create(
                 title = "제목1",
                 content = "내용내용1",
                 tags = listOf("태그1"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.TODO
             ),
-            CardData.create(
+            Card.create(
                 title = "제목2",
                 content = "내용내용2",
                 tags = listOf("태그2"),
                 manager = CardManagerState.DINO,
                 state = CardTaskState.IN_PROGRESS
             ),
-            CardData.create(
+            Card.create(
                 title = "제목3",
                 content = "내용내용3",
                 tags = listOf("태그3"),

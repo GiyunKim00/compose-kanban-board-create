@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui.Card.CardCreationPanel
+package woowacourse.kanban.board.ui.Card.CardCreationScreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -35,7 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import woowacourse.kanban.board.domain.ActionButtonType
-import woowacourse.kanban.board.domain.CardData
+import woowacourse.kanban.board.domain.Card
 import woowacourse.kanban.board.domain.CardManagerState
 import woowacourse.kanban.board.domain.CardTaskState
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultBackground
@@ -44,21 +44,21 @@ import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedBackground
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedContent
 
 @Composable
-fun CardCreationPanel(
+fun CardCreationScreen(
     modifier: Modifier = Modifier,
-    onAddItem: (CardData) -> Unit,
+    onAddItem: (Card) -> Unit,
     onShowCardCreationPanel: (Boolean) -> Unit,
 ) {
     var taskTitle by remember { mutableStateOf("") }
     var contents by remember { mutableStateOf("") }
     var tempTags by remember { mutableStateOf("") }
-    val tags = CardData.parseTag(tempTags)
+    val tags = Card.parseTag(tempTags)
     var state by remember { mutableStateOf(CardTaskState.TODO) }
     var manager by remember { mutableStateOf(CardManagerState.DINO) }
     var tagInfoText by remember { mutableStateOf("5자 이내의 태그를 최대 5개까지 등록할 수 있습니다.") }
     val createEnabled by remember {
         derivedStateOf {
-            CardData.isValidText(taskTitle) && CardData.isValidTag(tempTags)
+            Card.isValidText(taskTitle) && Card.isValidTag(tempTags)
         }
     }
 
@@ -85,10 +85,10 @@ fun CardCreationPanel(
                     onTextChange = {
                         taskTitle = it
                     },
-                    showAdditionalInfo = !CardData.isValidText(taskTitle),
+                    showAdditionalInfo = !Card.isValidText(taskTitle),
                     testTag = "titleTextField",
-                    infoText = CardData.getTitleInfo(),
-                    isError = !CardData.isValidText(taskTitle),
+                    infoText = Card.getTitleInfo(),
+                    isError = !Card.isValidText(taskTitle),
                 )
 
                 CardCreationPanelFormSection(
@@ -105,12 +105,12 @@ fun CardCreationPanel(
                     value = tempTags,
                     onTextChange = {
                         tempTags = it
-                        tagInfoText = CardData.isValidTagInfo(tempTags)
+                        tagInfoText = Card.isValidTagInfo(tempTags)
                     },
                     showAdditionalInfo = true,
                     testTag = "tagTextField",
                     infoText = tagInfoText,
-                    isError = !CardData.isValidTag(tempTags),
+                    isError = !Card.isValidTag(tempTags),
                 )
 
                 CardCreationPanelStateSection(
@@ -130,7 +130,7 @@ fun CardCreationPanel(
                     onCancelClick = { onShowCardCreationPanel(false) },
                     onCreateClick = {
                         onAddItem(
-                            CardData.create(
+                            Card.create(
                                 title = taskTitle,
                                 content = contents,
                                 tags = tags,

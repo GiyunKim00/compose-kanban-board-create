@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui.Card.CardCreationPanel
+package woowacourse.kanban.board.ui.Card.CardCreationScreen
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button

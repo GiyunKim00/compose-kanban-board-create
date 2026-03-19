@@ -1,9 +1,9 @@
 package woowacourse.kanban.board.domain
 
 class Board(
-    private val cardList: List<CardData> = emptyList(),
+    private val cardList: List<Card> = emptyList(),
 ) {
-    fun cards(): List<CardData> = cardList
+    fun cards(): List<Card> = cardList
 
     fun totalTaskCount(): Int = cardList.size
 
@@ -18,11 +18,11 @@ class Board(
         else doneTaskCount()* 100 / totalTaskCount()
     }
 
-    fun addCard(card: CardData): Board = Board(cardList + card)
+    fun addCard(card: Card): Board = Board(cardList + card)
 
-    fun deleteCard(card: CardData): Board = Board(cardList - card)
+    fun deleteCard(card: Card): Board = Board(cardList - card)
 
-    fun updateCard(targetCard : CardData, updatedCard : CardData) : Board = Board(
+    fun updateCard(targetCard : Card, updatedCard : Card) : Board = Board(
         cardList.map {
             if(it == targetCard) updatedCard
             else it

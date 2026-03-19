@@ -30,7 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import woowacourse.kanban.board.domain.CardData
+import woowacourse.kanban.board.domain.Card
 
 /**
  * Card UI입니다.
@@ -38,8 +38,8 @@ import woowacourse.kanban.board.domain.CardData
  * @param modifier Modifier
  */
 @Composable
-fun Card(
-    cardData: CardData,
+fun CardScreen(
+    cardData: Card,
     modifier: Modifier = Modifier,
 ) {
     Column(
