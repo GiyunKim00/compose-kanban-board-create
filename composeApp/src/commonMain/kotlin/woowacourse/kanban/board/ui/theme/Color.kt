@@ -11,3 +11,14 @@ object KanbanCardColor {
     val DefaultContent = Color.Black
     val DefaultBorder = Color(0xFFE5E7EB)
 }
+
+object BoardColor {
+    val TodoHeaderColor = Color(0xFF155DFC)
+    val TodoContentColor = Color(0xFFEFF6FF)
+
+    val InProgressHeaderColor = Color(0xFFE17100)
+    val InProgressContentColor = Color(0xFFFFFBEB)
+
+    val DoneHeaderColor = Color(0xFF00A63E)
+    val DoneContentColor = Color(0xFFF0FDF4)
+}

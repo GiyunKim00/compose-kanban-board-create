@@ -71,6 +71,7 @@
 - [x] taskState, managerState 등 파라미터를 명확하게 명명
 - [x] modifier 파리미터 추가
 - [x] 피드백에 따른 CardCreationScreen 수정
+- [x] 도메인-UI 책임 분리를 위한 Enum Class 수정
 
 ### 2차(예정)
 - [ ] 카드를 누르면 해당 카드 하단에 수정, 삭제 버튼이 노출된다.

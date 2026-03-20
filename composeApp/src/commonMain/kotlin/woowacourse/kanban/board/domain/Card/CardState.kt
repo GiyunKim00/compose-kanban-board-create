@@ -4,12 +4,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-enum class CardTaskState(
-    val taskState: String,
-) {
-    TODO("To Do"),
-    IN_PROGRESS("In Progress"),
-    DONE("Done"),
+enum class CardTaskState {
+    TODO,
+    IN_PROGRESS,
+    DONE
 }
 
 enum class CardManagerState(
