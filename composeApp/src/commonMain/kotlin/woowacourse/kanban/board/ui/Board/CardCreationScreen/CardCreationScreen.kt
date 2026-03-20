@@ -32,8 +32,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import woowacourse.kanban.board.domain.Board.CardFormState
 import woowacourse.kanban.board.domain.Card.ActionButtonType
 import woowacourse.kanban.board.domain.Card.Card
@@ -45,8 +47,34 @@ import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultContent
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedBackground
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedContent
 
+@Preview(widthDp = 672, heightDp = 909)
+@Composable
+fun CardCreationScreenRoot() {
+    CardCreationScreen(
+        onAddItem = {},
+        onDismiss = {},
+    )
+}
+
 @Composable
 fun CardCreationScreen(
+    modifier: Modifier = Modifier,
+    onAddItem: (Card) -> Unit,
+    onDismiss: () -> Unit,
+) {
+    Dialog(
+        onDismissRequest = onDismiss,
+    ) {
+        CardCreationScreenContents(
+            modifier = modifier,
+            onAddItem = onAddItem,
+            onDismiss = onDismiss,
+        )
+    }
+}
+
+@Composable
+private fun CardCreationScreenContents(
     modifier: Modifier = Modifier,
     onAddItem: (Card) -> Unit,
     onDismiss: () -> Unit,
