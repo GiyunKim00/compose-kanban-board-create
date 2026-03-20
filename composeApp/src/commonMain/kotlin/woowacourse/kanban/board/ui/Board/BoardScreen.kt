@@ -39,6 +39,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
@@ -56,7 +58,6 @@ import woowacourse.kanban.board.ui.theme.BoardColor.InProgressHeaderColor
 import woowacourse.kanban.board.ui.theme.BoardColor.TodoContentColor
 import woowacourse.kanban.board.ui.theme.BoardColor.TodoHeaderColor
 
-@Preview(widthDp = 1295, heightDp = 909)
 @Composable
 fun BoardScreenRoot() {
     var board by remember { mutableStateOf(Board()) }
@@ -113,7 +114,6 @@ fun BoardScreen(
 
             if (showCardCreationPanel) {
                 CardCreationScreen(
-                    modifier = Modifier.align(Alignment.Center),
                     onAddItem = { newCard ->
                         onAddCard(newCard)
                         onShowCardCreationPanelChange(false)
@@ -219,9 +219,6 @@ private fun BoardHeaderSection(
     }
 }
 
-/**
- * 테스트 용 보드 컨텐츠 간단 출력 모듈입니다. (추후 단계에서 구현 예정)
- */
 @Composable
 private fun BoardContents(
     modifier: Modifier = Modifier,
@@ -257,9 +254,8 @@ private fun BoardContents(
     }
 }
 
-@Preview
 @Composable
-private fun BoardHeaderSectionPreview() {
+private fun BoardCardColumnPreview() {
     BoardCardColumn(
         filteredCards = listOf(
             Card.create(
@@ -337,4 +333,104 @@ private fun BoardCardColumn(
             }
         }
     }
+}
+
+/* Preview */
+
+data class BoardScreenPreviewState(
+    val board: Board,
+    val showCardCreationPanel: Boolean,
+)
+
+class BoardScreenPreviewProvider : PreviewParameterProvider<BoardScreenPreviewState> {
+    override val values: Sequence<BoardScreenPreviewState>
+        get() = sequenceOf(
+            BoardScreenPreviewState(
+                board = Board(emptyList()),
+                showCardCreationPanel = false,
+            ),
+            BoardScreenPreviewState(
+                board = Board(
+                    listOf(
+                        Card.create(
+                            title = "UI 테스트용 1",
+                            content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+                            tags = listOf("UI", "테스트"),
+                            manager = CardManagerState.DINO,
+                            state = CardTaskState.TODO,
+                        ),
+                        Card.create(
+                            title = "UI 테스트용 2 UI 테스트용 2 UI 테스트용 2",
+                            content = "내용내용내용내용내용내용내용내용",
+                            tags = listOf("UI", "테스트"),
+                            manager = CardManagerState.DINO,
+                            state = CardTaskState.IN_PROGRESS,
+                        ),
+                        Card.create(
+                            title = "UI 테스트용 3 UI 테스트용 3 UI 테스트용 3",
+                            content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+                            tags = listOf("UI", "테스트"),
+                            manager = CardManagerState.FAMES,
+                            state = CardTaskState.DONE,
+                        ),
+                    )
+                ),
+                showCardCreationPanel = false,
+            ),
+            BoardScreenPreviewState(
+                board = Board(
+                    listOf(
+                        Card.create(
+                            title = "UI 테스트용 1",
+                            content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용",
+                            tags = listOf("UI", "테스트"),
+                            manager = CardManagerState.DINO,
+                            state = CardTaskState.DONE,
+                        ),
+                        Card.create(
+                            title = "UI 테스트용 2 UI 테스트용 2 UI 테스트용 2",
+                            content = "내용내용내용내용내용내용내용내용",
+                            tags = listOf("UI", "테스트"),
+                            manager = CardManagerState.DINO,
+                            state = CardTaskState.DONE,
+                        ),
+                    )
+                ),
+                showCardCreationPanel = false,
+            ),
+            BoardScreenPreviewState(
+                board = Board(
+                    listOf(
+                        Card.create(
+                            title = "태스크 생성 모달 테스트",
+                            content = "모달이 열린 상태를 확인합니다.",
+                            tags = listOf("모달"),
+                            manager = CardManagerState.DINO,
+                            state = CardTaskState.TODO,
+                        ),
+                    )
+                ),
+                showCardCreationPanel = true,
+            ),
+        )
+}
+
+@Preview(
+    name = "BoardScreen Preview",
+    widthDp = 1295,
+    heightDp = 909,
+    showBackground = true,
+)
+@Composable
+private fun BoardScreenPreview(
+    @PreviewParameter(BoardScreenPreviewProvider::class)
+    state: BoardScreenPreviewState,
+) {
+    BoardScreen(
+        board = state.board,
+        showCardCreationPanel = state.showCardCreationPanel,
+        onAddCard = {},
+        onShowCardCreationPanelChange = {},
+        modifier = Modifier,
+    )
 }
