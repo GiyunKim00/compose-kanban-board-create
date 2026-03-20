@@ -6,18 +6,18 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.runComposeUiTest
-import woowacourse.kanban.board.ui.Card.CardCreationScreen.CardCreationScreen
+import woowacourse.kanban.board.ui.Board.CardCreationScreen.CardCreationScreen
 import kotlin.test.Test
 
 @OptIn(ExperimentalTestApi::class)
-class CardCreationPanelTest {
+class CardCreationScreenTest {
     @Test
     fun `초기 진입 시 기본 UI 상태가 올바르게 표시된다`() = runComposeUiTest {
         //when
         setContent {
             CardCreationScreen(
                 onAddItem = {},
-                onShowCardCreationPanel = {},
+                onDismiss = {}
             )
         }
 
@@ -38,7 +38,7 @@ class CardCreationPanelTest {
         setContent {
             CardCreationScreen(
                 onAddItem = {},
-                onShowCardCreationPanel = {},
+                onDismiss = {}
             )
         }
         onNodeWithTag("titleTextField").performTextInput(" ")
@@ -54,7 +54,7 @@ class CardCreationPanelTest {
         setContent {
             CardCreationScreen(
                 onAddItem = {},
-                onShowCardCreationPanel = {},
+                onDismiss = {}
             )
         }
         onNodeWithTag("titleTextField").performTextInput("\t")
@@ -68,7 +68,7 @@ class CardCreationPanelTest {
         setContent {
             CardCreationScreen(
                 onAddItem = {},
-                onShowCardCreationPanel = {},
+                onDismiss = {}
             )
         }
 
@@ -84,7 +84,7 @@ class CardCreationPanelTest {
         setContent {
             CardCreationScreen(
                 onAddItem = {},
-                onShowCardCreationPanel = {},
+                onDismiss = {}
             )
         }
 
