@@ -6,6 +6,7 @@ package woowacourse.kanban.board.domain.Card
  * 생성은 [create] 팩토리 메서드로 수행합니다.
  */
 class Card private constructor(
+    val id: Long,
     val title: String,
     val content: String,
     val tags: List<String>,
@@ -15,6 +16,13 @@ class Card private constructor(
     companion object {
         private const val MAX_TAG_COUNT = 5
         private const val MAX_TAG_LENGTH = 5
+
+        private var autoGenerateId: Long = 0L
+
+        private fun generateId(): Long {
+            autoGenerateId += 1
+            return autoGenerateId
+        }
 
         private const val TITLE_INVALID_FORMAT_MSG = "제목을 입력해 주세요."
         private const val TAG_VALID_FORMAT_MSG = "5자 이내의 태그를 최대 5개까지 등록할 수 있습니다."
@@ -66,6 +74,42 @@ class Card private constructor(
             manager: CardManagerState,
             state: CardTaskState,
         ): Card {
+            return defaultCreate(
+                id = generateId(),
+                title = title,
+                content = content,
+                tags = tags,
+                manager = manager,
+                state = state,
+            )
+        }
+
+        fun update(
+            id: Long,
+            title: String,
+            content: String,
+            tags: List<String>,
+            manager: CardManagerState,
+            state: CardTaskState,
+        ): Card {
+            return defaultCreate(
+                id = id,
+                title = title,
+                content = content,
+                tags = tags,
+                manager = manager,
+                state = state,
+            )
+        }
+
+        private fun defaultCreate(
+            id: Long,
+            title: String,
+            content: String,
+            tags: List<String>,
+            manager: CardManagerState,
+            state: CardTaskState,
+        ): Card {
             require(title.isNotBlank()) { "[Card] 제목은 필수 입력 항목입니다." }
 
             val normalizedTags = tags
@@ -76,9 +120,10 @@ class Card private constructor(
             require(normalizedTags.all { it.length <= MAX_TAG_LENGTH }) { "[Card] 태그는 최대 ${MAX_TAG_LENGTH}자까지 가능합니다." }
 
             return Card(
+                id = id,
                 title = title,
                 content = content,
-                tags = normalizedTags,
+                tags = tags,
                 manager = manager,
                 state = state,
             )
