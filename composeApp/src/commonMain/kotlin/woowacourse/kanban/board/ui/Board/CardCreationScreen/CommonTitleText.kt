@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui.Card.CardCreationScreen
+package woowacourse.kanban.board.ui.Board.CardCreationScreen
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
