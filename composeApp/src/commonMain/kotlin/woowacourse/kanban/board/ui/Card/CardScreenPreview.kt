@@ -59,7 +59,7 @@ private class CardPreviewParameterProvider : PreviewParameterProvider<Card> {
 private fun CardPreview(
     @PreviewParameter(CardPreviewParameterProvider::class) cardData: Card,
 ) {
-    CardScreen(
+    CardScreenRoot(
         modifier = Modifier.width(286.dp),
         cardData = cardData,
     )

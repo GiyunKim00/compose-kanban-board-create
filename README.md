@@ -67,7 +67,7 @@
 ## 리팩토링
 ### 1차
 - [x] 컴포저블 및 파일명 수정
-- [ ] cardData를 출력하는 CardScreen 재사용성을 위한 브릿지 컴포저블 생성
+- [x] cardData를 출력하는 CardScreen 재사용성을 위한 브릿지 컴포저블 생성
 - [x] taskState, managerState 등 파라미터를 명확하게 명명
 - [ ] modifier 파리미터 추가
 
