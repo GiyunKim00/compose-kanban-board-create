@@ -69,7 +69,8 @@
 - [x] 컴포저블 및 파일명 수정
 - [x] cardData를 출력하는 CardScreen 재사용성을 위한 브릿지 컴포저블 생성
 - [x] taskState, managerState 등 파라미터를 명확하게 명명
-- [ ] modifier 파리미터 추가
+- [x] modifier 파리미터 추가
+- [x] 피드백에 따른 CardCreationScreen 수정
 
 ### 2차(예정)
 - [ ] 카드를 누르면 해당 카드 하단에 수정, 삭제 버튼이 노출된다.
