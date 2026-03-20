@@ -10,8 +10,8 @@ class Card private constructor(
     val title: String,
     val content: String,
     val tags: List<String>,
-    val manager: CardManagerState,
-    val state: CardTaskState,
+    val managerState: CardManagerState,
+    val taskState: CardTaskState,
 ) {
     companion object {
         private const val MAX_TAG_COUNT = 5
@@ -123,9 +123,9 @@ class Card private constructor(
                 id = id,
                 title = title,
                 content = content,
-                tags = tags,
-                manager = manager,
-                state = state,
+                tags = normalizedTags,
+                managerState = manager,
+                taskState = state,
             )
         }
     }
