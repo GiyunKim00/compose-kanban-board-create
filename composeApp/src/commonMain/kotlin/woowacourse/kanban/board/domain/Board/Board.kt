@@ -10,4 +10,9 @@ class Board(
 
     fun totalTaskCount(): Int = cardList.size
 
+    fun doneTaskCount(): Int = cardList.count { it.taskState == CardTaskState.DONE }
+
+    fun inProgressTaskCount(): Int = cardList.count { it.taskState == CardTaskState.IN_PROGRESS}
+
+    fun toDoTaskCount(): Int = cardList.count { it.taskState == CardTaskState.TODO}
 }
