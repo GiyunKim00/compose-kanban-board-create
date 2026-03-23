@@ -66,7 +66,7 @@ fun BoardScreen() {
     BoardScreen(
         board = board,
         showCardCreationPanel = showCardCreationPanel,
-        onAddCard = { newCard -> board = board.addCard(newCard) },
+        onAddCard = { newCard -> board += newCard },
         onShowCardCreationPanelChange = { showCardCreationPanel = it },
         modifier = Modifier.fillMaxSize(),
     )

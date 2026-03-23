@@ -51,7 +51,7 @@ class BoardScreenTest {
             BoardScreen(
                 board = board,
                 showCardCreationPanel = showCardCreationPanel,
-                onAddCard = { newCard -> board = board.addCard(newCard) },
+                onAddCard = { newCard -> board += newCard },
                 onShowCardCreationPanelChange = { showCardCreationPanel = it },
             )
         }
@@ -62,14 +62,16 @@ class BoardScreenTest {
 
     @Test
     fun `카드 목록이 표시된다`() = runComposeUiTest {
-        val board = Board().addCard(
-            Card.create(
-                title = "테스트 카드",
-                content = "테스트 내용",
-                tags = listOf("태그"),
-                manager = CardManagerState.DINO,
-                state = CardTaskState.TODO,
-            ),
+        val board = Board(
+            listOf(
+                Card.create(
+                    title = "테스트 카드",
+                    content = "테스트 내용",
+                    tags = listOf("태그"),
+                    manager = CardManagerState.DINO,
+                    state = CardTaskState.TODO,
+                )
+            )
         )
 
         setContent {
@@ -93,7 +95,7 @@ class BoardScreenTest {
             BoardScreen(
                 board = board,
                 showCardCreationPanel = showCardCreationPanel,
-                onAddCard = { newCard -> board = board.addCard(newCard) },
+                onAddCard = { newCard -> board += newCard },
                 onShowCardCreationPanelChange = { showCardCreationPanel = it },
             )
         }
@@ -118,7 +120,7 @@ class BoardScreenTest {
             BoardScreen(
                 board = board,
                 showCardCreationPanel = showCardCreationPanel,
-                onAddCard = { newCard -> board = board.addCard(newCard) },
+                onAddCard = { newCard -> board += newCard },
                 onShowCardCreationPanelChange = { showCardCreationPanel = it },
             )
         }
