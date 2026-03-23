@@ -141,7 +141,9 @@ private fun BoardHeaderSection(
 ) {
     val doneCount = board.doneTaskCount
     val totalCount = board.totalTaskCount
-    val completionRate = board.completionRate
+    val completionRatio = board.completionRatio
+    val completionPercentage = board.completionPercentage
+
 
     Column(
         modifier = modifier
@@ -165,7 +167,7 @@ private fun BoardHeaderSection(
                     modifier = Modifier.testTag("보드 제목"),
                 )
                 Text(
-                    text = "완료율: ${completionRate}% (${doneCount}/${totalCount})",
+                    text = "완료율: ${completionPercentage}% (${doneCount}/${totalCount})",
                     fontWeight = FontWeight.W400,
                     color = Color(0xFF6A7282),
                     fontSize = 14.sp,
@@ -206,7 +208,7 @@ private fun BoardHeaderSection(
         Spacer(modifier = Modifier.height(16.dp))
 
         LinearProgressIndicator(
-            progress = { completionRate.toFloat() / 100 },
+            progress = { completionRatio },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(8.dp)
