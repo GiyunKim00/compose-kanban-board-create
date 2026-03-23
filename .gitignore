@@ -48,3 +48,7 @@ xcuserdata
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
+/composeApp/src/commonTest/kotlin/woowacourse/kanban/ui/card/CardTest.kt
+/composeApp/src/commonTest/kotlin/woowacourse/kanban/study/LaunchedEffectTest.kt
+/composeApp/src/commonTest/kotlin/woowacourse/kanban/study/LazyColumnTest.kt
+/composeApp/src/commonTest/kotlin/woowacourse/kanban/study/UsernameTextFieldTest.kt
