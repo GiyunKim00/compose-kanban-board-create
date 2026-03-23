@@ -22,15 +22,4 @@ class Board(
     }
 
     fun addCard(card: Card): Board = Board(cardList + card)
-
-    /**
-    fun deleteCard(card: Card): Board = Board(cardList - card)
-
-    fun updateCard(targetCard: Card, updatedCard: Card): Board = Board(
-        cardList.map {
-            if (it.id == targetCard.id) updatedCard
-            else it
-        }
-    )
-    */
 }
