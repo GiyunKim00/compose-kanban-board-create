@@ -1,4 +1,4 @@
-package woowacourse.kanban.board.ui.Board.CardCreationScreen
+package woowacourse.kanban.ui.card
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -36,16 +36,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import woowacourse.kanban.board.domain.Board.CardFormState
-import woowacourse.kanban.board.domain.Card.ActionButtonType
-import woowacourse.kanban.board.domain.Card.Card
-import woowacourse.kanban.board.domain.Card.CardManagerState
-import woowacourse.kanban.board.domain.Card.CardTaskState
-import woowacourse.kanban.board.ui.Board.CommonComposable.toDisplayText
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultBackground
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultContent
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedBackground
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedContent
+import woowacourse.kanban.domain.board.CardFormState
+import woowacourse.kanban.domain.card.ActionButtonType
+import woowacourse.kanban.domain.card.Card
+import woowacourse.kanban.domain.card.CardManagerState
+import woowacourse.kanban.domain.card.CardTaskState
+import woowacourse.kanban.ui.board.common.toDisplayText
+import woowacourse.kanban.ui.card.creation.ActionButton
+import woowacourse.kanban.ui.card.creation.CardCreationPanelFormSection
+import woowacourse.kanban.ui.card.creation.TitleText
 
 @Preview(widthDp = 672, heightDp = 909)
 @Composable
