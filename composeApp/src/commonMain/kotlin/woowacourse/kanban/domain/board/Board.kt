@@ -6,20 +6,13 @@ import woowacourse.kanban.domain.card.CardTaskState
 class Board(
     private val cardList: List<Card> = emptyList(),
 ) {
-    fun cards(): List<Card> = cardList
-
-    fun totalTaskCount(): Int = cardList.size
-
-    fun doneTaskCount(): Int = cardList.count { it.taskState == CardTaskState.DONE }
-
-    fun inProgressTaskCount(): Int = cardList.count { it.taskState == CardTaskState.IN_PROGRESS}
-
-    fun toDoTaskCount(): Int = cardList.count { it.taskState == CardTaskState.TODO}
-
-    fun completionRate() : Int {
-        return if(totalTaskCount() == 0) 0
-        else doneTaskCount()* 100 / totalTaskCount()
-    }
+    val cards: List<Card> = cardList
+    val totalTaskCount: Int = cardList.size
+    val doneTaskCount: Int = cardList.count { it.taskState == CardTaskState.DONE }
+    val inProgressTaskCount: Int = cardList.count { it.taskState == CardTaskState.IN_PROGRESS }
+    val toDoTaskCount: Int = cardList.count { it.taskState == CardTaskState.TODO }
+    val completionRate: Int = if (totalTaskCount == 0) 0
+    else doneTaskCount * 100 / totalTaskCount
 
     fun addCard(card: Card): Board = Board(cardList + card)
 }

@@ -139,9 +139,9 @@ private fun BoardHeaderSection(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val doneCount = board.doneTaskCount()
-    val totalCount = board.totalTaskCount()
-    val completionRate = board.completionRate()
+    val doneCount = board.doneTaskCount
+    val totalCount = board.totalTaskCount
+    val completionRate = board.completionRate
 
     Column(
         modifier = modifier
@@ -234,21 +234,21 @@ private fun BoardContents(
             modifier = Modifier
                 .width(320.dp)
                 .height(748.dp),
-            filteredCards = board.cards().filter { it.taskState == CardTaskState.TODO },
+            filteredCards = board.cards.filter { it.taskState == CardTaskState.TODO },
             mode = CardTaskState.TODO,
         )
         BoardCardColumn(
             modifier = Modifier
                 .width(320.dp)
                 .height(748.dp),
-            filteredCards = board.cards().filter { it.taskState == CardTaskState.IN_PROGRESS },
+            filteredCards = board.cards.filter { it.taskState == CardTaskState.IN_PROGRESS },
             mode = CardTaskState.IN_PROGRESS,
         )
         BoardCardColumn(
             modifier = Modifier
                 .width(320.dp)
                 .height(748.dp),
-            filteredCards = board.cards().filter { it.taskState == CardTaskState.DONE },
+            filteredCards = board.cards.filter { it.taskState == CardTaskState.DONE },
             mode = CardTaskState.DONE,
         )
     }
