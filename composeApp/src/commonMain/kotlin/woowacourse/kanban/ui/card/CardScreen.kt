@@ -41,7 +41,7 @@ import woowacourse.kanban.ui.board.common.toDisplayText
  * @param cardData Card의 데이터입니다.
  */
 @Composable
-fun CardScreenRoot(
+fun CardScreen(
     modifier: Modifier = Modifier,
     cardData: Card,
 ) {

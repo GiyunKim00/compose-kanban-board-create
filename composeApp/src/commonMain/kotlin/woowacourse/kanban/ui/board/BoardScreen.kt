@@ -44,22 +44,22 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import woowacourse.kanban.domain.board.Board
-import woowacourse.kanban.domain.card.Card
-import woowacourse.kanban.domain.card.CardManagerState
-import woowacourse.kanban.domain.card.CardTaskState
-import woowacourse.kanban.ui.card.CardCreationScreen
-import woowacourse.kanban.ui.board.common.toDisplayText
-import woowacourse.kanban.ui.card.CardScreenRoot
 import woowacourse.kanban.board.ui.theme.BoardColor.DoneContentColor
 import woowacourse.kanban.board.ui.theme.BoardColor.DoneHeaderColor
 import woowacourse.kanban.board.ui.theme.BoardColor.InProgressContentColor
 import woowacourse.kanban.board.ui.theme.BoardColor.InProgressHeaderColor
 import woowacourse.kanban.board.ui.theme.BoardColor.TodoContentColor
 import woowacourse.kanban.board.ui.theme.BoardColor.TodoHeaderColor
+import woowacourse.kanban.domain.board.Board
+import woowacourse.kanban.domain.card.Card
+import woowacourse.kanban.domain.card.CardManagerState
+import woowacourse.kanban.domain.card.CardTaskState
+import woowacourse.kanban.ui.board.common.toDisplayText
+import woowacourse.kanban.ui.card.CardCreationScreen
+import woowacourse.kanban.ui.card.CardScreen
 
 @Composable
-fun BoardScreenRoot() {
+fun BoardScreen() {
     var board by remember { mutableStateOf(Board()) }
     var showCardCreationPanel by remember { mutableStateOf(false) }
 
@@ -255,22 +255,6 @@ private fun BoardContents(
 }
 
 @Composable
-private fun BoardCardColumnPreview() {
-    BoardCardColumn(
-        filteredCards = listOf(
-            Card.create(
-                title = "Lazy Column 컴포넌트 구현",
-                content = "세로 스크롤 가능한 리스트 컴포넌트를 만들고 성능 최적화를 적용합니다.",
-                tags = listOf("컴포넌트", "성능"),
-                manager = CardManagerState.DINO,
-                state = CardTaskState.TODO,
-            ),
-        ),
-        mode = CardTaskState.TODO,
-    )
-}
-
-@Composable
 private fun BoardCardColumn(
     modifier: Modifier = Modifier,
     filteredCards: List<Card>,
@@ -329,7 +313,7 @@ private fun BoardCardColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(filteredCards) { card ->
-                CardScreenRoot(cardData = card)
+                CardScreen(cardData = card)
             }
         }
     }
