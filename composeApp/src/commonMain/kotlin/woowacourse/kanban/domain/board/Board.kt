@@ -15,5 +15,6 @@ class Board(
     else doneTaskCount.toFloat() / totalTaskCount
     val completionPercentage = (completionRatio * 100).toInt()
 
+    fun cardsByState(state: CardTaskState): List<Card> = cards.filter { it.taskState == state  }
     operator fun plus(card: Card): Board = Board(cardList + card)
 }

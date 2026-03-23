@@ -236,21 +236,21 @@ private fun BoardContents(
             modifier = Modifier
                 .width(320.dp)
                 .height(748.dp),
-            filteredCards = board.cards.filter { it.taskState == CardTaskState.TODO },
+            filteredCards = board.cardsByState(CardTaskState.TODO),
             mode = CardTaskState.TODO,
         )
         BoardCardColumn(
             modifier = Modifier
                 .width(320.dp)
                 .height(748.dp),
-            filteredCards = board.cards.filter { it.taskState == CardTaskState.IN_PROGRESS },
+            filteredCards = board.cardsByState(CardTaskState.IN_PROGRESS),
             mode = CardTaskState.IN_PROGRESS,
         )
         BoardCardColumn(
             modifier = Modifier
                 .width(320.dp)
                 .height(748.dp),
-            filteredCards = board.cards.filter { it.taskState == CardTaskState.DONE },
+            filteredCards = board.cardsByState(CardTaskState.DONE),
             mode = CardTaskState.DONE,
         )
     }
@@ -359,7 +359,7 @@ class BoardScreenPreviewProvider : PreviewParameterProvider<BoardScreenPreviewSt
                             manager = CardManagerState.FAMES,
                             state = CardTaskState.DONE,
                         ),
-                    )
+                    ),
                 ),
                 showCardCreationPanel = false,
             ),
@@ -380,7 +380,7 @@ class BoardScreenPreviewProvider : PreviewParameterProvider<BoardScreenPreviewSt
                             manager = CardManagerState.DINO,
                             state = CardTaskState.DONE,
                         ),
-                    )
+                    ),
                 ),
                 showCardCreationPanel = false,
             ),
@@ -394,7 +394,7 @@ class BoardScreenPreviewProvider : PreviewParameterProvider<BoardScreenPreviewSt
                             manager = CardManagerState.DINO,
                             state = CardTaskState.TODO,
                         ),
-                    )
+                    ),
                 ),
                 showCardCreationPanel = true,
             ),
