@@ -41,12 +41,12 @@ import woowacourse.kanban.board.ui.theme.KanbanCardColor.DefaultContent
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedBackground
 import woowacourse.kanban.board.ui.theme.KanbanCardColor.SelectedContent
 import woowacourse.kanban.domain.board.CardFormState
-import woowacourse.kanban.domain.card.ActionButtonType
 import woowacourse.kanban.domain.card.Card
 import woowacourse.kanban.domain.card.CardManagerState
 import woowacourse.kanban.domain.card.CardTaskState
 import woowacourse.kanban.ui.board.common.toDisplayText
 import woowacourse.kanban.ui.card.creation.ActionButton
+import woowacourse.kanban.ui.card.creation.ActionButtonType
 import woowacourse.kanban.ui.card.creation.CardCreationPanelFormSection
 import woowacourse.kanban.ui.card.creation.TitleText
 
@@ -266,7 +266,7 @@ private fun CardCreationPanelManagerSection(
         ) {
             CardManagerState.entries.forEach { manager ->
                 ManagerButton(
-                    text = manager.managerName,
+                    text = manager.toDisplayText(),
                     isSelected = selectedManager == manager,
                     onClick = { onManagerChange(manager) },
                     modifier = Modifier
